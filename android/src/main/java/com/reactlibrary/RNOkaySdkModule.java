@@ -78,10 +78,15 @@ public class RNOkaySdkModule extends ReactContextBaseJavaModule {
         String pubPss = spaEnrollDataMap.getString("pubPss");
         String installationId = spaEnrollDataMap.getString("installationId");
         ReadableMap pageThemeMap = spaEnrollDataMap.getMap("pageTheme");
-        PageTheme pageTheme = initPageTheme(pageThemeMap, promise);
         PsaType psaType = PsaType.OKAY;
-
-        SpaEnrollData enrollData = new SpaEnrollData(appPns, pubPss, installationId, pageTheme, psaType);
+        SpaEnrollData enrollData;
+        if(pageThemeMap != null) {
+            PageTheme pageTheme = initPageTheme(pageThemeMap, promise);
+            enrollData = new SpaEnrollData(appPns, pubPss, installationId, pageTheme, psaType);
+        }
+        else {
+            enrollData = new SpaEnrollData(appPns, pubPss, installationId, null, psaType);
+        }
         PsaManager.startEnrollmentActivity(activity, enrollData);
     }
 
@@ -95,10 +100,16 @@ public class RNOkaySdkModule extends ReactContextBaseJavaModule {
         int sessionId = spaEnrollDataMap.getInt("sessionId");
         String appPNS = spaEnrollDataMap.getString("appPNS");
         ReadableMap pageThemeMap = spaEnrollDataMap.getMap("pageTheme");
-        PageTheme pageTheme = initPageTheme(pageThemeMap, promise);
         PsaType psaType = PsaType.OKAY;
 
-        SpaAuthorizationData authorizationData = new SpaAuthorizationData(sessionId, appPNS, pageTheme, psaType);
+        SpaAuthorizationData authorizationData;
+        if(pageThemeMap != null) {
+            PageTheme pageTheme = initPageTheme(pageThemeMap, promise);
+            authorizationData = new SpaAuthorizationData(sessionId, appPNS, pageTheme, psaType);
+        }
+        else {
+            authorizationData = new SpaAuthorizationData(sessionId, appPNS, null, psaType);
+        }
         PsaManager.startAuthorizationActivity(activity, authorizationData);
     }
 
