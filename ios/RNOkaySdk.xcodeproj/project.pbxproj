@@ -8,9 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B3E7B58A1CC2AC0600A0062D /* RNOkaySdk.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNOkaySdk.m */; };
+		BC60F6772271E87400ACB77F /* PSA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC60F6762271E87400ACB77F /* PSA.framework */; };
+		BC60F6792271E88100ACB77F /* PSACommon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BC60F6782271E88100ACB77F /* PSACommon.framework */; };
 		BC7F3BFA226CFBBE002D2BD6 /* RNOkaySdk.h in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5881CC2AC0600A0062D /* RNOkaySdk.h */; };
-		BC8EBED7226D2D3A00E7B0BD /* PSACommon.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BC8EBEA0226D2BA200E7B0BD /* PSACommon.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		BC8EBED8226D2D3A00E7B0BD /* PSA.framework in Copy Files */ = {isa = PBXBuildFile; fileRef = BC8EBE9E226D2B9B00E7B0BD /* PSA.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -20,8 +20,6 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 10;
 			files = (
-				BC8EBED7226D2D3A00E7B0BD /* PSACommon.framework in Copy Files */,
-				BC8EBED8226D2D3A00E7B0BD /* PSA.framework in Copy Files */,
 			);
 			name = "Copy Files";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -32,10 +30,10 @@
 		134814201AA4EA6300B7C361 /* libRNOkaySdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNOkaySdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3E7B5881CC2AC0600A0062D /* RNOkaySdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNOkaySdk.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNOkaySdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNOkaySdk.m; sourceTree = "<group>"; };
+		BC60F6762271E87400ACB77F /* PSA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSA.framework; path = PSA/PSA.framework; sourceTree = "<group>"; };
+		BC60F6782271E88100ACB77F /* PSACommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSACommon.framework; path = PSACommon/PSACommon.framework; sourceTree = "<group>"; };
 		BC8330D822687E1A000CEC5C /* RNOkaySdk-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RNOkaySdk-Bridging-Header.h"; sourceTree = "<group>"; };
 		BC8330D922687E1B000CEC5C /* RNOkaySdk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RNOkaySdk.swift; sourceTree = "<group>"; };
-		BC8EBE9E226D2B9B00E7B0BD /* PSA.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSA.framework; path = PSA/PSA.framework; sourceTree = "<group>"; };
-		BC8EBEA0226D2BA200E7B0BD /* PSACommon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PSACommon.framework; path = PSACommon/PSACommon.framework; sourceTree = "<group>"; };
 		BCCEEE3C226A47D200A2E8D9 /* PSA.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PSA.podspec; path = PSA/PSA.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -44,6 +42,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC60F6792271E88100ACB77F /* PSACommon.framework in Frameworks */,
+				BC60F6772271E87400ACB77F /* PSA.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -90,8 +90,8 @@
 		BCE6CD89226D121D00525284 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				BC8EBEA0226D2BA200E7B0BD /* PSACommon.framework */,
-				BC8EBE9E226D2B9B00E7B0BD /* PSA.framework */,
+				BC60F6782271E88100ACB77F /* PSACommon.framework */,
+				BC60F6762271E87400ACB77F /* PSA.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

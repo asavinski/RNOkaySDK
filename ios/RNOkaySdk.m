@@ -1,67 +1,106 @@
 
 #import "RNOkaySdk.h"
 
-//#import <React/RCTBridgeModule.h>
 #import <PSA/PSA.h>
 
 @implementation RNOkaySdk
 
 RCT_EXPORT_MODULE();
 
-//RCT_EXPORT_METHOD(addEvent:(NSString *)name location:(NSString *)location)
-////{
-////    RCTLogInfo(@"Pretending to create an event %@ at %@", name, location);
-////}
-//
-//RCT_EXTERN_METHOD(addEvent:(NSString *)name location:(NSString *)location date:(nonnull NSNumber *)date)
-//
-//RCT_EXTERN_METHOD(updateDeviceToken:(NSString *)deviceToken
-//                  resolver:(RCTPromiseResolveBlock)resolve
-//                  rejecter:(RCTPromiseRejectBlock)reject);
-//
-//RCT_EXTERN_METHOD(enrollmentProcedure:(NSString *)withHost
-//                      installationId: (NSString *)installationId
-//                      pubPssBase64: (NSString *)pubPssBase64
-//                      resolver:(RCTPromiseResolveBlock)resolve
-//                      rejecter:(RCTPromiseRejectBlock)reject);
-//
+RCT_REMAP_METHOD(authorization,
+                 spaAuthorizationData: (NSDictionary *) spaAuthorizationData
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    @try{
+        NSNumber *sessionId = [spaAuthorizationData valueForKeyPath:@"SpaAuthorizationData.sessionId"];
+        [PSA startAuthorizationWithTheme: nil
+                               sessionId: sessionId
+                              completion:^(BOOL result, PSASharedStatuses status) {
+                                  NSString *response = [[NSString alloc] init];
+                                  if(status != Success) {
+                                      response = @"Authorization finished: Error";
+                                  } else {
+                                      response = @"Authorization finished: OK";
+                                  }
+                                  resolve(response);
+                              }];
+    }
+    @catch (NSError *error) {
+        reject(@"Error",@"Error", error);
+    }
+}
+
+
+RCT_REMAP_METHOD(enrollProcedure,
+                 spaEnrollData: (NSDictionary *)spaEnrollData
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    @try{
+        NSString *appPns = [spaEnrollData valueForKeyPath:@"SpaEnrollData.appPns"];
+        NSString *host = [spaEnrollData valueForKeyPath:@"SpaEnrollData.host"];
+        NSString *installationId = [spaEnrollData valueForKeyPath:@"SpaEnrollData.installationId"];
+        NSString *pubPss = [spaEnrollData valueForKeyPath:@"SpaEnrollData.pubPss"];
+        [PSA startEnrollmentWithHost: host
+                      installationId: installationId
+                        pubPssBase64: pubPss
+                        idCompletion:^(PSASharedStatuses status) {
+                            NSString *response = [[NSString alloc] init];
+                            if(status != Success) {
+                                response = @"Enrollment finished: Error";
+                            } else {
+                                response = @"Enrollment finished: OK";
+                            }
+                            resolve(response);
+                        }];
+    }
+    @catch (NSError *error) {
+        reject(@"Error",@"Error", error);
+    }
+}
+
+
 RCT_REMAP_METHOD(isEnrolled,
                  isEnrolledWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
     @try{
         BOOL isEnrolled = [PSA isEnrolled];
-        resolve(@"is Enrolled");
-        
+        resolve(isEnrolled ? @"true" : @"false");
     }
-    @catch (NSException *exception) {
-        //reject(@"BAD",@"BAD",NSError);
+    @catch (NSError *error) {
+        reject(@"Error",@"Error", error);
     }
 }
-////RCT_EXPORT_METHOD(getDeviceName:(RCTResponseSenderBlock)callback){
-////    @try{
-////        NSString *deviceName = [[UIDevice currentDevice] name];
-////        callback(@[[NSNull null], deviceName]);
-////    }
-////    @catch(NSException *exception){
-////        callback(@[exception.reason, [NSNull null]]);
-////    }
-////}
-//
-////RCT_EXPORT_METHOD(getDeviceName:(RCTResponseSenderBlock)callback){
-////    @try{
-////        NSNumber t = PSA.isEnrolled;
-////        NSString *deviceName = [[UIDevice currentDevice] name];
-////        callback(@[[NSNull null], t]);
-////    }
-////    @catch(NSException *exception){
-////        callback(@[exception.reason, [NSNull null]]);
-////    }
-////}
-//
-//RCT_EXTERN_METHOD(isReadyForAuthorization:(RCTPromiseResolveBlock)resolve
-//                      rejecter:(RCTPromiseRejectBlock)reject);
-//
+
+
+RCT_REMAP_METHOD(updateDeviceToken,
+                 token: (NSString *) token
+                 resolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    @try{
+        [PSA updateDeviceToken:token];
+        
+    }
+    @catch (NSError *error) {
+        reject(@"Error",@"Error", error);
+    }
+}
+
+RCT_REMAP_METHOD(isReadyForAuthorization,
+                 isReadyForAuthorizationdWithResolver:(RCTPromiseResolveBlock)resolve
+                 rejecter:(RCTPromiseRejectBlock)reject)
+{
+    @try{
+        BOOL isReadyForAuthorization = [PSA isReadyForAuthorization];
+        resolve(isReadyForAuthorization ? @"true" : @"false");
+    }
+    @catch (NSError *error) {
+        reject(@"Error",@"Error", error);
+    }
+}
 
 @end
 
