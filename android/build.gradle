@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.0'
+        classpath 'com.android.tools.build:gradle:3.4.1'
     }
 }
 
@@ -22,7 +22,7 @@ android {
     }
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -38,15 +38,14 @@ repositories {
     google()
     jcenter()
     maven {
-        //url 'https://dl.bintray.com/okaythis/maven'
-        url 'https://dl.bintray.com/itrtestorg/maven'
+        url 'https://dl.bintray.com/okaythis/maven'
     }
 }
 
 dependencies {
     implementation 'com.facebook.react:react-native:+'
-    implementation 'com.okaythis.sdk:psa:1.0.5'
-    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.8'
+    implementation 'com.okaythis.sdk:psa:1.0.7'
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.9'
 
 }
   

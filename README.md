@@ -5,10 +5,10 @@
 * Project_Name/custom_modules
 ##### 2) Added folder with library to your **custom_modules** folder:
 ---
-* Project_Name/custom_modules/OkaySDK
+* Project_Name/custom_modules/RNOkaySDK
 ##### 3) Added to package.json ***dependencies***:
 ---
-*  "react-native-okay-sdk": "file:custom_modules/OkaySDK"
+*  "react-native-okay-sdk": "file:custom_modules/RNOkaySDK"
 ##### 4) Install node_modules:
 ---
 ```sh
@@ -30,7 +30,7 @@ $ react-native link react-native-okay-sdk
 buildscript {
     ext {
         buildToolsVersion = "28.0.3"
-        minSdkVersion = 21 // Change this to 21
+        minSdkVersion = 16
         compileSdkVersion = 28
         targetSdkVersion = 28
         supportLibVersion = "28.0.0"
@@ -52,7 +52,7 @@ allprojects {
         }
         // Begin: Added This
         maven {
-            url 'https://dl.bintray.com/itrtestorg/maven'
+            url 'https://dl.bintray.com/okaythis/maven'
         }
         // End:
     }
