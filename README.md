@@ -3,10 +3,10 @@
 ##### 1) Create folder **custom_modules** in your project root folder: 
 ---
 * Project_Name/custom_modules
-##### 2) Added folder with library to your **custom_modules** folder:
+##### 2) Add folder with library to your **custom_modules** folder:
 ---
 * Project_Name/custom_modules/RNOkaySDK
-##### 3) Added to package.json ***dependencies***:
+##### 3) Add to package.json ***dependencies***:
 ---
 *  "react-native-okay-sdk": "file:custom_modules/RNOkaySDK"
 ##### 4) Install node_modules:
